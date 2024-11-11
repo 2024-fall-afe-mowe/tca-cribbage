@@ -156,7 +156,7 @@ const App = () => {
       </div>
       
       <div 
-        className="p-3"
+        className="p-3 min-h-screen"
       >
         <RouterProvider
           router={myRouter}
