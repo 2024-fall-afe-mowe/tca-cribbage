@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import {
   createHashRouter,
@@ -80,6 +80,32 @@ const App = () => {
 
   const [darkMode, setDarkMode] = useState(false);
 
+
+  useEffect(
+    () => {
+      
+      const loadDarkMode = async () => {
+
+        const savedDarkMode = await localforage.getItem<boolean>("darkMode") ?? false;
+
+        if (!ignore) {
+          setDarkMode(savedDarkMode);
+        }
+      }
+
+      let ignore = false;
+
+      loadDarkMode();
+      
+      return () => {
+        ignore = true;
+      }
+    }
+    , []
+  );
+
+
+  
   const myRouter = createHashRouter(
     [
       {
