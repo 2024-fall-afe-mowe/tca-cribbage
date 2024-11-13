@@ -10,6 +10,7 @@ import {Play} from './Play';
 
 import { GameResult, LeaderboardEntry, getLeaderboard, getPreviousPlayers, getGeneralFacts} from './game-results';
 
+import localforage from 'localforage';
 
 const dummyGameResults: GameResult[] = [
   {
@@ -129,7 +130,10 @@ const App = () => {
           <input 
             type="checkbox"
             checked={darkMode}
-            onChange={() => setDarkMode(!darkMode)}
+            onChange={async () => {
+              await localforage.setItem<boolean>("darkMode", !darkMode);
+              setDarkMode(!darkMode);
+            }}
            />
 
           
